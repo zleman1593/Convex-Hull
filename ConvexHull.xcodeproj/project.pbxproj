@@ -1,0 +1,255 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A2D12F441A92F97E00E8E244 /* geom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F3E1A92F97E00E8E244 /* geom.cpp */; };
+		A2D12F451A92F97E00E8E244 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F401A92F97E00E8E244 /* Makefile */; };
+		A2D12F461A92F97E00E8E244 /* rtimer.c in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F411A92F97E00E8E244 /* rtimer.c */; };
+		A2D12F471A92F97E00E8E244 /* viewPoints.c in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F431A92F97E00E8E244 /* viewPoints.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A2D12F321A92F95700E8E244 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A2D12F341A92F95700E8E244 /* ConvexHull */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ConvexHull; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2D12F3E1A92F97E00E8E244 /* geom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geom.cpp; sourceTree = "<group>"; };
+		A2D12F3F1A92F97E00E8E244 /* geom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geom.h; sourceTree = "<group>"; };
+		A2D12F401A92F97E00E8E244 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		A2D12F411A92F97E00E8E244 /* rtimer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtimer.c; sourceTree = "<group>"; };
+		A2D12F421A92F97E00E8E244 /* rtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtimer.h; sourceTree = "<group>"; };
+		A2D12F431A92F97E00E8E244 /* viewPoints.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = viewPoints.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A2D12F311A92F95700E8E244 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A2D12F2B1A92F95700E8E244 = {
+			isa = PBXGroup;
+			children = (
+				A2D12F361A92F95700E8E244 /* ConvexHull */,
+				A2D12F351A92F95700E8E244 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A2D12F351A92F95700E8E244 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2D12F341A92F95700E8E244 /* ConvexHull */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A2D12F361A92F95700E8E244 /* ConvexHull */ = {
+			isa = PBXGroup;
+			children = (
+				A2D12F3E1A92F97E00E8E244 /* geom.cpp */,
+				A2D12F3F1A92F97E00E8E244 /* geom.h */,
+				A2D12F401A92F97E00E8E244 /* Makefile */,
+				A2D12F411A92F97E00E8E244 /* rtimer.c */,
+				A2D12F421A92F97E00E8E244 /* rtimer.h */,
+				A2D12F431A92F97E00E8E244 /* viewPoints.c */,
+			);
+			path = ConvexHull;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A2D12F331A92F95700E8E244 /* ConvexHull */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2D12F3B1A92F95700E8E244 /* Build configuration list for PBXNativeTarget "ConvexHull" */;
+			buildPhases = (
+				A2D12F301A92F95700E8E244 /* Sources */,
+				A2D12F311A92F95700E8E244 /* Frameworks */,
+				A2D12F321A92F95700E8E244 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ConvexHull;
+			productName = ConvexHull;
+			productReference = A2D12F341A92F95700E8E244 /* ConvexHull */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A2D12F2C1A92F95700E8E244 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Zleman-MXing";
+				TargetAttributes = {
+					A2D12F331A92F95700E8E244 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = A2D12F2F1A92F95700E8E244 /* Build configuration list for PBXProject "ConvexHull" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A2D12F2B1A92F95700E8E244;
+			productRefGroup = A2D12F351A92F95700E8E244 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A2D12F331A92F95700E8E244 /* ConvexHull */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A2D12F301A92F95700E8E244 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2D12F461A92F97E00E8E244 /* rtimer.c in Sources */,
+				A2D12F451A92F97E00E8E244 /* Makefile in Sources */,
+				A2D12F471A92F97E00E8E244 /* viewPoints.c in Sources */,
+				A2D12F441A92F97E00E8E244 /* geom.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A2D12F391A92F95700E8E244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A2D12F3A1A92F95700E8E244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A2D12F3C1A92F95700E8E244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A2D12F3D1A92F95700E8E244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A2D12F2F1A92F95700E8E244 /* Build configuration list for PBXProject "ConvexHull" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2D12F391A92F95700E8E244 /* Debug */,
+				A2D12F3A1A92F95700E8E244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2D12F3B1A92F95700E8E244 /* Build configuration list for PBXNativeTarget "ConvexHull" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2D12F3C1A92F95700E8E244 /* Debug */,
+				A2D12F3D1A92F95700E8E244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A2D12F2C1A92F95700E8E244 /* Project object */;
+}
