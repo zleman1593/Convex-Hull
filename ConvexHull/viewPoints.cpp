@@ -185,6 +185,8 @@ void initialize_points_ten() {
     points[n-2].y = WINDOWSIZE/2 + eyeheight;
     points[n-1].x = WINDOWSIZE/2 + eyesep;
     points[n-1].y = WINDOWSIZE/2 + eyeheight;
+    
+}
 void initialize_points_cubic() {
     //points must be allocated
     assert(points);
