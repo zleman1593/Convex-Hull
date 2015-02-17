@@ -20,12 +20,13 @@ What it does:
 #include <math.h>
 #include <assert.h>
 
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
 
+#include <GLUT/glut.h>
+
+#include <OpenGL/OpenGL.h>
+#include <OpenGL/gl.h> // Header File For The OpenGL32 Library
+#include <OpenGL/glu.h> // Header File For The GLu32 Library
+#include <GLUT/glut.h> // Header File For The GLut Library
 
 GLfloat red[3] = {1.0, 0.0, 0.0};
 GLfloat green[3] = {0.0, 1.0, 0.0};
@@ -60,6 +61,194 @@ pointNode*  hull = NULL;
 
 
 
+void initialize_points_arrow() {
+    assert(points);
+    
+    double pos = WINDOWSIZE / 4;
+    double slope = 0.5;
+    double offset = 200;
+    int mod = 3;
+    
+    
+    // Draw first third of the arrow.
+    for (int i = 0; i < n / mod; i++) {
+        switch (i % mod) {
+            case 0: {
+                // Upper half of head.
+                points[i].y = pos + i * slope;
+                points[i].x = i + offset;
+            } break;
+            case 1: {
+                // Middle.
+                points[i].y = pos;
+                points[i].x = i + offset;
+            } break;
+            case 2: {
+                // Bottom half of head.
+                points[i].y = pos + i * slope * -1;
+                points[i].x = i + offset;
+            } break;
+            default:
+                break;
+        }
+    }
+    
+    
+    // Fill in the rest with a straight line.
+    for (int i = n / mod; i < n; i += mod) {
+        points[i].y = pos;
+        points[i].x = i + offset;
+    }
+}
+
+
+void initialize_points_stuff(){
+    assert(points);
+    int i;
+    points[0].x = 100;
+    points[0].y  = 100;
+    for(i = 1; i < n/2; i++){
+        points[i].y = WINDOWSIZE*2/3-i;
+        points[i].x = WINDOWSIZE/2 +i;
+    }
+    
+    for(i = n/2; i < n; i++){
+        points[i].x = WINDOWSIZE/3-i;
+        points[i].y = (WINDOWSIZE*2/3) + i;
+    }
+    
+    
+}
+void initialize_points_cascade(){
+    assert(points);
+    int i;
+    points[0].x = WINDOWSIZE/4;
+    points[0].y = WINDOWSIZE/4;
+    points[1].x = 3*WINDOWSIZE/4;
+    points[1].y = WINDOWSIZE/4;
+    
+    for(i = 2; i < n-1; i++){
+        points[i].x = 5*WINDOWSIZE/11 - (int)100*cos(i*M_PI/(2*n));
+        points[i].y = (WINDOWSIZE/3) + (int)100*sin(i*M_PI/(2*n));
+    }
+    
+    points[n-1].x = WINDOWSIZE/4;
+    points[n-1].y = 3*WINDOWSIZE/4;
+}
+
+void initialize_points_rightangle(){
+    assert(points);
+    int i;
+    int j;
+    for(i=0; i< n/2; i++){
+        points[i].x = WINDOWSIZE/4;
+        points[i].y= WINDOWSIZE/4 + (WINDOWSIZE/4)/(n/2)*i;
+    }
+    for(j=i; j< n; j++){
+        points[j].x = WINDOWSIZE/4 +(WINDOWSIZE/4)/(n/2)*(j-i);
+        points[j].y = WINDOWSIZE/4 + (WINDOWSIZE/4)/(n/2)*i;
+    }
+}
+void initialize_points_3() {
+    assert(points);
+    
+    int i;
+    for (i=0; i<n; i++) {
+        if (i%2 == 0) {
+            points[i].x = .2*WINDOWSIZE;
+            points[i].y =  random() % ((int)(.6*WINDOWSIZE));
+            points[i].y += .2*WINDOWSIZE;
+        };
+        if (i%2 == 1)  {
+            points[i].x = random() % ((int)(.6*WINDOWSIZE));
+            points[i].x +=  .2*WINDOWSIZE;
+            points[i].y = .2*WINDOWSIZE;
+        }
+    }
+}
+void initialize_points_ten() {
+    int i;
+    int upperrad = .3*WINDOWSIZE;
+    int lowerrad = .4*WINDOWSIZE;
+    int eyesep = .1*WINDOWSIZE;
+    int eyeheight = .2*WINDOWSIZE;
+    int twoPi = 2*M_PI;
+    for (i=0; i<(n/2)-1; i++) {
+        points[i].x = WINDOWSIZE/2 + upperrad*cos(twoPi*i);
+        points[i].y = WINDOWSIZE/2 - fabs(upperrad*sin(twoPi*i));
+    }
+    for (i=(n/2)-1; i<n-2; i++) {
+        points[i].x = WINDOWSIZE/2 + lowerrad*cos(twoPi*i);
+        points[i].y = WINDOWSIZE/2 - fabs(lowerrad*sin(twoPi*i));
+    }
+    points[n-2].x = WINDOWSIZE/2 - eyesep;
+    points[n-2].y = WINDOWSIZE/2 + eyeheight;
+    points[n-1].x = WINDOWSIZE/2 + eyesep;
+    points[n-1].y = WINDOWSIZE/2 + eyeheight;
+void initialize_points_cubic() {
+    //points must be allocated
+    assert(points);
+    
+    
+    float step = (cbrt(WINDOWSIZE * WINDOWSIZE) - cbrt(-WINDOWSIZE * WINDOWSIZE)) / n;
+    int index = 0;
+    
+    
+    for (float i = cbrt(-WINDOWSIZE * WINDOWSIZE) + WINDOWSIZE / 2; index < n / 2; i += step * 2) {
+        points[index].x = (int) i;
+        points[index].y = (int) ((i - WINDOWSIZE / 2) * (i - WINDOWSIZE / 2) * (i - WINDOWSIZE / 2) / (WINDOWSIZE * 2) + WINDOWSIZE / 2);
+        index++;
+    }
+    
+    
+    for (float i = -cbrt(-WINDOWSIZE * WINDOWSIZE) + WINDOWSIZE / 2; index < n; i -= step * 2) {
+        points[index].x = (int) i;
+        points[index].y = (int) (-(i - WINDOWSIZE / 2) * (i - WINDOWSIZE / 2) * (i - WINDOWSIZE / 2) / (WINDOWSIZE * 2) + WINDOWSIZE / 2);
+        index++;
+    }
+}
+void initialize_points_horizontal_line()
+{
+    assert(points);
+    int i;
+    for (i = 0; i < n; i++){
+        points[i]. x = (int) (.3*WINDOWSIZE) / 2 + random() % ((int)(.7*WINDOWSIZE));
+        points[i].y = (int) WINDOWSIZE / 2;
+    }
+}
+
+void initialize_points_vertical_line()
+{
+    assert(points);
+    int i;
+    for(i = 0; i < n; i ++){
+        points[i].x = (int) WINDOWSIZE / 2;
+        points[i].y = (int) (.3*WINDOWSIZE) / 2 + random() % ((int) (.7*WINDOWSIZE));
+    }
+}
+
+void init_x_marks_the_spot() {
+    assert(points);
+    int start_x = WINDOWSIZE/2;
+    int start_y = WINDOWSIZE/2;
+    int scale = 5;
+    for(int i = 0; i < (n/4); i++) {
+        points[i].x = start_x + scale*i;
+        points[i].y = start_y + scale*i;
+    }
+    for(int i = (n/4); i < (n/2); i++) {
+        points[i].x = start_x - scale*(i-(n/4));
+        points[i].y = start_y + scale*(i-(n/4));
+    }
+    for(int i = (n/2); i < (3*n/4); i++) {
+        points[i].x = start_x - scale*(i-(n/2));
+        points[i].y = start_y - scale*(i-(n/2));
+    }
+    for(int i = (3*n/4); i < n; i++) {
+        points[i].x = start_x + scale*(i-(3*n/4));
+        points[i].y = start_y - scale*(i-(3*n/4));
+    }
+}
 
 /* ****************************** */
 /* initialize  the array of points stored in global variable points[] with random points */
@@ -148,7 +337,9 @@ int main(int argc, char** argv) {
   points = (point2D*)malloc(n*sizeof(point2D));
   assert(points); 
   //initialize_points_random();
-  initialize_points_star();
+  //initialize_points_star();
+    //initialize_points_arrow();
+    initialize_points_cubic();
 
   //print_points();
 
@@ -218,8 +409,6 @@ void draw_points(){
   }
 
 }
-
-
 
 
 
@@ -302,5 +491,7 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
    glLoadIdentity();             // Reset
    gluOrtho2D(0.0, (GLdouble) width, 0.0, (GLdouble) height); 
 }
+
+
 
 
