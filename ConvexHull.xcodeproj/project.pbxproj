@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		A2D12F441A92F97E00E8E244 /* geom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F3E1A92F97E00E8E244 /* geom.cpp */; };
 		A2D12F451A92F97E00E8E244 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F401A92F97E00E8E244 /* Makefile */; };
-		A2D12F461A92F97E00E8E244 /* rtimer.c in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F411A92F97E00E8E244 /* rtimer.c */; };
-		A2D12F471A92F97E00E8E244 /* viewPoints.c in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F431A92F97E00E8E244 /* viewPoints.c */; };
+		A2D12F461A92F97E00E8E244 /* rtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F411A92F97E00E8E244 /* rtimer.cpp */; };
+		A2D12F471A92F97E00E8E244 /* viewPoints.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F431A92F97E00E8E244 /* viewPoints.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,9 +30,9 @@
 		A2D12F3E1A92F97E00E8E244 /* geom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geom.cpp; sourceTree = "<group>"; };
 		A2D12F3F1A92F97E00E8E244 /* geom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geom.h; sourceTree = "<group>"; };
 		A2D12F401A92F97E00E8E244 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		A2D12F411A92F97E00E8E244 /* rtimer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtimer.c; sourceTree = "<group>"; };
+		A2D12F411A92F97E00E8E244 /* rtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtimer.cpp; sourceTree = "<group>"; };
 		A2D12F421A92F97E00E8E244 /* rtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtimer.h; sourceTree = "<group>"; };
-		A2D12F431A92F97E00E8E244 /* viewPoints.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = viewPoints.c; sourceTree = "<group>"; };
+		A2D12F431A92F97E00E8E244 /* viewPoints.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewPoints.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +68,9 @@
 				A2D12F3E1A92F97E00E8E244 /* geom.cpp */,
 				A2D12F3F1A92F97E00E8E244 /* geom.h */,
 				A2D12F401A92F97E00E8E244 /* Makefile */,
-				A2D12F411A92F97E00E8E244 /* rtimer.c */,
+				A2D12F411A92F97E00E8E244 /* rtimer.cpp */,
 				A2D12F421A92F97E00E8E244 /* rtimer.h */,
-				A2D12F431A92F97E00E8E244 /* viewPoints.c */,
+				A2D12F431A92F97E00E8E244 /* viewPoints.cpp */,
 			);
 			path = ConvexHull;
 			sourceTree = "<group>";
@@ -131,9 +131,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2D12F461A92F97E00E8E244 /* rtimer.c in Sources */,
+				A2D12F461A92F97E00E8E244 /* rtimer.cpp in Sources */,
 				A2D12F451A92F97E00E8E244 /* Makefile in Sources */,
-				A2D12F471A92F97E00E8E244 /* viewPoints.c in Sources */,
+				A2D12F471A92F97E00E8E244 /* viewPoints.cpp in Sources */,
 				A2D12F441A92F97E00E8E244 /* geom.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +248,7 @@
 				A2D12F3D1A92F95700E8E244 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

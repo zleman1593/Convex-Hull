@@ -102,6 +102,23 @@ void initialize_points_star() {
 
 }
 
+void initialize_points_cascade() {
+    assert(points);
+    int i;
+    points[0].x = WINDOWSIZE/4;
+    points[0].y = WINDOWSIZE/4;
+    points[1].x = 3*WINDOWSIZE/4;
+    points[1].y = WINDOWSIZE/4;
+    
+    for(i = 2; i < n-1; i++){
+        points[i].x = 5*WINDOWSIZE/11 - (int)100*cos(i*M_PI/(2*n));
+        points[i].y = (WINDOWSIZE/3) + (int)100*sin(i*M_PI/(2*n));
+    }
+    
+    points[n-1].x = WINDOWSIZE/4;
+    points[n-1].y = 3*WINDOWSIZE/4;
+}
+
 /* ****************************** */
 /* print the array of points stored in global variable points[]*/
 void print_points() {
@@ -148,8 +165,9 @@ int main(int argc, char** argv) {
   points = (point2D*)malloc(n*sizeof(point2D));
   assert(points); 
   //initialize_points_random();
-  initialize_points_star();
-
+//  initialize_points_star();
+  initialize_points_cascade();
+    
   //print_points();
 
   Rtimer rt1; 
@@ -200,7 +218,7 @@ void draw_points(){
 
   const int R= 1;
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-  //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+  //glPolygonMode(GL_FRONcT_AND_BACK, GL_LINE);
 
   //set color 
   glColor3fv(yellow);   
