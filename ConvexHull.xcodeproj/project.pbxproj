@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A22C43261A9397BF00ACC864 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22C43251A9397BF00ACC864 /* OpenGL.framework */; };
+		A22C43281A9398B600ACC864 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22C43271A9398B600ACC864 /* GLUT.framework */; };
 		A2D12F441A92F97E00E8E244 /* geom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F3E1A92F97E00E8E244 /* geom.cpp */; };
 		A2D12F451A92F97E00E8E244 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F401A92F97E00E8E244 /* Makefile */; };
 		A2D12F461A92F97E00E8E244 /* rtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D12F411A92F97E00E8E244 /* rtimer.cpp */; };
@@ -26,6 +28,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A22C43251A9397BF00ACC864 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		A22C43271A9398B600ACC864 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		A2D12F341A92F95700E8E244 /* ConvexHull */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ConvexHull; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D12F3E1A92F97E00E8E244 /* geom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geom.cpp; sourceTree = "<group>"; };
 		A2D12F3F1A92F97E00E8E244 /* geom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geom.h; sourceTree = "<group>"; };
@@ -40,6 +44,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A22C43281A9398B600ACC864 /* GLUT.framework in Frameworks */,
+				A22C43261A9397BF00ACC864 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +55,8 @@
 		A2D12F2B1A92F95700E8E244 = {
 			isa = PBXGroup;
 			children = (
+				A22C43271A9398B600ACC864 /* GLUT.framework */,
+				A22C43251A9397BF00ACC864 /* OpenGL.framework */,
 				A2D12F361A92F95700E8E244 /* ConvexHull */,
 				A2D12F351A92F95700E8E244 /* Products */,
 			);

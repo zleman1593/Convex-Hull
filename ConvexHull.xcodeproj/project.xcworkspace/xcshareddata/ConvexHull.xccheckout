@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8C671049-9BAE-49D9-8147-18793AD6FE0A</string>
+	<string>FED4A84F-7099-476E-BC3B-D012F9E9D14B</string>
 	<key>IDESourceControlProjectName</key>
 	<string>ConvexHull</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>72A7F768AF1CAAB787211B6D98349799B643038C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Convex-Hull</string>
+			<string>ConvexHull</string>
 		</dict>
 	</array>
 </dict>

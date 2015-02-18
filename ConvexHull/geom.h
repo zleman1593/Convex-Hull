@@ -31,6 +31,8 @@ int collinear(point2D p, point2D q, point2D r);
 /* return 1 if c is  strictly left of ab; 0 otherwise */
 int left (point2D a, point2D b, point2D c); 
 
+/* returns -1 if c is left of ab, 0 if colinear, and 1 if c is right of ab. */
+int cmpDirection(point2D a, point2D b, point2D c);
 
 /* compute the convex hull of the points in p; the points on the CH are returned as a list 
 */
