@@ -340,8 +340,8 @@ int main(int argc, char** argv) {
   assert(points); 
   //initialize_points_random();
   //initialize_points_star();
-    //initialize_points_arrow();
-    initialize_points_cubic();
+    initialize_points_arrow();
+    //initialize_points_cubic();
 
   //print_points();
 

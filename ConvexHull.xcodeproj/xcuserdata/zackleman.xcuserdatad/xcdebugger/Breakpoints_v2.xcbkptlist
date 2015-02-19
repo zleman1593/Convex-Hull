@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "292"
             endingLineNumber = "292"
-            landmarkName = "main(int argc, char** argv)"
+            landmarkName = "initialize_points_star()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -14,11 +14,11 @@ std::stack<point2D> s;
 
 /* **************************************** */
 /* returns the signed area of triangle abc. The area is positive if c
-   is to the left of ab, and negative if c is to the right of ab
+ is to the left of ab, and negative if c is to the right of ab
  */
 int signed_area2D(point2D a, point2D b, point2D c) {
-
-  return 1; 
+    
+    return 1;
 }
 
 
@@ -26,8 +26,8 @@ int signed_area2D(point2D a, point2D b, point2D c) {
 /* **************************************** */
 /* return 1 if p,q,r collinear, and 0 otherwise */
 int collinear(point2D p, point2D q, point2D r) {
-  
-  return 1; 
+    
+    return 1;
 }
 
 
@@ -35,38 +35,42 @@ int collinear(point2D p, point2D q, point2D r) {
 /* **************************************** */
 /* return 1 if c is  strictly left of ab; 0 otherwise */
 int left (point2D a, point2D b, point2D c) {
-  
-  return 1; 
+    
+    return 1;
 }
 
 /* returns -1 if c is left of ab, 0 if colinear, and 1 if c is right of ab. */
 int cmpDirection(point2D a, point2D b, point2D c) {
-    return -1;
+    //Calculate 2D cross-product
+    int direction = (b.y - a.y) * (c.x - a.x) - (b.x - a.x) * (c.y - a.y);
+    
+    if (direction == 0) {
+        
+        return 0;// colinear triplet
+    }
+    else if (direction > 0){
+        return 1;//Right
+    }else{
+        return -1;//left
+        
+    }
+    
 }
 
-/* Sort slopes in increasing order
+/* Sort points in increasing order of polar angle with respect to Po
  */
 int cmpfunc(const void * a, const void * b) {
     /*Type cast*/
     point2D* p = (point2D*) a;
     point2D* q = (point2D*) b;
     
-//    double angle_1 = atan((p->y - p_0.y) / (p->x - p_0.x));
-//    double angle_2 = atan((q->y - p_0.y) / (q->x - p_0.x));
-//    
-//    if (angle_1 < angle_2) {
-//        return -1;
-//    } else if (x->slope > y->slope) {
-//        return 1;
-//    } else {
-//        return 0;
-//    }
-
+    
+    
     return cmpDirection(p_0, *p, *q);
 }
 
-/* compute the convex hull of the points in p; the points on the CH are returned as a list 
-*/
+/* compute the convex hull of the points in p; the points on the CH are returned as a list
+ */
 pointNode* graham_scan(point2D* p, int n) {
     // Starting point is the one with lowest y coordinate.
     p_0 = p[0];
@@ -105,6 +109,6 @@ pointNode* graham_scan(point2D* p, int n) {
         }
     }
     
-  return NULL; 
+    return NULL; 
 }
 
