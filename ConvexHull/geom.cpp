@@ -44,18 +44,24 @@ int cmpDirection(point2D a, point2D b, point2D c) {
     //Calculate 2D cross-product
     int direction = (b.y - a.y) * (c.x - a.x) - (b.x - a.x) * (c.y - a.y);
     
-    if (direction == 0) {
+    if (direction == COLINEAR) {
         
-        return 0;// colinear triplet
+        return COLINEAR;// colinear triplet
     }
     else if (direction > 0){
-        return 1;//Right
+        return RIGHT;//Right
     }else{
-        return -1;//left
+        return LEFT;//left
         
     }
     
 }
+
+int distance(point2D a, point2D b)
+{
+    return (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y);
+}
+
 
 /* Sort points in increasing order of polar angle with respect to Po
  */
@@ -64,12 +70,19 @@ int cmpfunc(const void * a, const void * b) {
     point2D* p = (point2D*) a;
     point2D* q = (point2D*) b;
     
-    
-    
-    return cmpDirection(p_0, *p, *q);
+    int direction = cmpDirection(p_0, *p, *q);
+    if (direction == COLINEAR){
+        //If points have same polar angle then add the closest one first
+        if (distance(p_0, *p) >= distance(p_0, *q)){
+            return LEFT;
+        }else{ return RIGHT;}
+        
+    }else{
+        return direction;
+    }
 }
 
-/* compute the convex hull of the points in p; the points on the CH are returned as a list
+/* Compute the convex hull of the points in p; the points on the CH are returned as a list
  */
 pointNode* graham_scan(point2D* p, int n) {
     // Starting point is the one with lowest y coordinate.
@@ -89,7 +102,7 @@ pointNode* graham_scan(point2D* p, int n) {
     p[0] = p_0;
     p[index] = temp;
     
-    // Sort the other n - 1 points by angle.
+    // Sort the other n - 1 points by polar angle/distance wrt Po.
     qsort(&p[1], n - 1, sizeof(point2D), cmpfunc);
     
     // Initialize
@@ -101,7 +114,8 @@ pointNode* graham_scan(point2D* p, int n) {
     while (i < n) {
         point2D first = p[i - 2];
         point2D second = p[i - 1];
-        if (cmpDirection(p_0, first, second) == LEFT) {
+        point2D third = p[i];
+        if (cmpDirection(first, second, third) == LEFT) {
             s.push(p[i]);
             i++;
         } else {
@@ -109,6 +123,6 @@ pointNode* graham_scan(point2D* p, int n) {
         }
     }
     
-    return NULL; 
+    return NULL;
 }
 
