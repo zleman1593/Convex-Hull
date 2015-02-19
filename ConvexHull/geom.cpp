@@ -82,6 +82,17 @@ int cmpfunc(const void * a, const void * b) {
     }
 }
 
+
+point2D secondFromTopInStack(std::stack<point2D> &stack){
+    
+    point2D topPoint = stack.top();
+    stack.pop();
+    point2D secondPointFromTop = stack.top();
+    stack.push(topPoint);
+    return secondPointFromTop;
+}
+
+
 /* Compute the convex hull of the points in p; the points on the CH are returned as a list
  */
 pointNode* graham_scan(point2D* p, int n) {
@@ -108,12 +119,13 @@ pointNode* graham_scan(point2D* p, int n) {
     // Initialize
     s.push(p_0);
     s.push(p[1]);
+    //s.push(p[2]);
     
     // Iterate over points and push on stack as necessary.
     int i = 2;
     while (i < n) {
-        point2D first = p[i - 2];
-        point2D second = p[i - 1];
+        point2D first = secondFromTopInStack(s);
+        point2D second = s.top();
         point2D third = p[i];
         if (cmpDirection(first, second, third) == LEFT) {
             s.push(p[i]);
