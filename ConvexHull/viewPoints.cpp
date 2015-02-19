@@ -338,10 +338,17 @@ int main(int argc, char** argv) {
   //allocate global arrays of n points 
   points = (point2D*)malloc(n*sizeof(point2D));
   assert(points); 
-  //initialize_points_random();
-  //initialize_points_star();
-    initialize_points_arrow();
-    //initialize_points_cubic();
+
+//  initialize_points_star();
+//initialize_points_cubic();
+//  init_x_marks_the_spot();
+  
+//     initialize_points_arrow();
+//      initialize_points_random();
+    
+    initialize_points_vertical_line();
+//    initialize_points_horizontal_line();
+
 
   //print_points();
 
@@ -444,7 +451,7 @@ void draw_hull(){
     glVertex2f(hull->p.x, hull->p.y); 
     glEnd();
     prev=crt; 
-    crt=crt->next; 
+    //crt=crt->next;
   
   }//if (hull)
 }

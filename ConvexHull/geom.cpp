@@ -45,16 +45,12 @@ int cmpDirection(point2D a, point2D b, point2D c) {
     int direction = (b.y - a.y) * (c.x - a.x) - (b.x - a.x) * (c.y - a.y);
     
     if (direction == COLINEAR) {
-        
         return COLINEAR;// colinear triplet
-    }
-    else if (direction > 0){
+    } else if (direction > 0){
         return RIGHT;//Right
-    }else{
+    } else {
         return LEFT;//left
-        
     }
-    
 }
 
 int distance(point2D a, point2D b)
@@ -71,20 +67,18 @@ int cmpfunc(const void * a, const void * b) {
     point2D* q = (point2D*) b;
     
     int direction = cmpDirection(p_0, *p, *q);
-    if (direction == COLINEAR){
+    if (direction == COLINEAR) {
         //If points have same polar angle then add the closest one first
-        if (distance(p_0, *p) >= distance(p_0, *q)){
+        if (distance(p_0, *p) <= distance(p_0, *q)) {
             return LEFT;
-        }else{ return RIGHT;}
-        
-    }else{
-        return direction;
+        }
+        return RIGHT;
     }
+    return direction;
 }
 
 
 point2D secondFromTopInStack(std::stack<point2D> &stack){
-    
     point2D topPoint = stack.top();
     stack.pop();
     point2D secondPointFromTop = stack.top();
@@ -96,13 +90,18 @@ point2D secondFromTopInStack(std::stack<point2D> &stack){
 pointNode* createListFromFinalStack(){
     pointNode * node, * head;
     head = NULL;
-    while (s.size() != 0) {
+    int limit = 0;
+    while (s.size() != 0 &&  limit < 2) {
+        //DEBUG
+//        limit++;
+        
         node = (pointNode *)malloc(sizeof(pointNode));
-        node-> p = s.pop();
-        node-> next = head;
+        point2D temp = s.top();
+        s.pop();
+        node->p = temp;
+        node->next = head;
         head = node;
     }
-    
     return head;
 }
 
@@ -117,11 +116,12 @@ pointNode* graham_scan(point2D* p, int n) {
     for (int i = 0; i < n; i++) {
         point2D current = p[i];
         // If two points have the same y, take the one with smaller x.
-        if (current.y < lowest_y || (current.y == lowest_y && current.x < p_0.x)) {
+        if (current.y < lowest_y || (current.y == lowest_y && current.x > p_0.x)) {
             p_0 = current;
             index = i;
         }
     }
+    
     // Move p_0 to front of the array.
     point2D temp = p[0];
     p[0] = p_0;
@@ -131,9 +131,8 @@ pointNode* graham_scan(point2D* p, int n) {
     qsort(&p[1], n - 1, sizeof(point2D), cmpfunc);
     
     // Initialize
-    s.push(p_0);
+    s.push(p[0]);
     s.push(p[1]);
-    //s.push(p[2]);
     
     // Iterate over points and push on stack as necessary.
     int i = 2;
