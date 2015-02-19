@@ -93,6 +93,20 @@ point2D secondFromTopInStack(std::stack<point2D> &stack){
 }
 
 
+pointNode* createListFromFinalStack(){
+    pointNode * node, * head;
+    head = NULL;
+    while (s.size() != 0) {
+        node = (pointNode *)malloc(sizeof(pointNode));
+        node-> p = s.pop();
+        node-> next = head;
+        head = node;
+    }
+    
+    return head;
+}
+
+
 /* Compute the convex hull of the points in p; the points on the CH are returned as a list
  */
 pointNode* graham_scan(point2D* p, int n) {
@@ -135,6 +149,8 @@ pointNode* graham_scan(point2D* p, int n) {
         }
     }
     
-    return NULL;
+    return createListFromFinalStack();
 }
+
+
 
