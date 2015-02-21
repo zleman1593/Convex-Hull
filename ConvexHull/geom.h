@@ -7,14 +7,12 @@ typedef struct _point2d {
 } point2D;
 
 
-
-
 //a list of points 
 typedef struct _pointNode pointNode; 
 struct _pointNode  {
   point2D p;
   pointNode* next;
-}; 
+};
 
 
 

@@ -35,7 +35,6 @@ int collinear(point2D p, point2D q, point2D r) {
 /* **************************************** */
 /* return 1 if c is  strictly left of ab; 0 otherwise */
 int left (point2D a, point2D b, point2D c) {
-    
     return 1;
 }
 
@@ -77,7 +76,7 @@ int cmpfunc(const void * a, const void * b) {
     return direction;
 }
 
-
+// Return second element from top of stack.
 point2D secondFromTopInStack(std::stack<point2D> &stack){
     point2D topPoint = stack.top();
     stack.pop();
@@ -88,17 +87,13 @@ point2D secondFromTopInStack(std::stack<point2D> &stack){
 
 
 pointNode* createListFromFinalStack(){
-    pointNode * node, * head;
-    head = NULL;
-    int limit = 0;
-    while (s.size() != 0 &&  limit < 2) {
-        //DEBUG
-//        limit++;
-        
+    pointNode *node;
+    pointNode *head = NULL;
+    while (s.size() > 0) {
         node = (pointNode *)malloc(sizeof(pointNode));
-        point2D temp = s.top();
+        point2D top = s.top();
         s.pop();
-        node->p = temp;
+        node->p = top;
         node->next = head;
         head = node;
     }
@@ -115,7 +110,7 @@ pointNode* graham_scan(point2D* p, int n) {
     int index = 0;
     for (int i = 0; i < n; i++) {
         point2D current = p[i];
-        // If two points have the same y, take the one with smaller x.
+        // If two points have the same y, take the one with bigger x.
         if (current.y < lowest_y || (current.y == lowest_y && current.x > p_0.x)) {
             p_0 = current;
             index = i;
