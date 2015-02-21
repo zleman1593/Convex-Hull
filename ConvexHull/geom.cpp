@@ -113,6 +113,7 @@ pointNode* graham_scan(point2D* p, int n) {
         // If two points have the same y, take the one with bigger x.
         if (current.y < lowest_y || (current.y == lowest_y && current.x > p_0.x)) {
             p_0 = current;
+            lowest_y = current.y;
             index = i;
         }
     }
@@ -132,9 +133,20 @@ pointNode* graham_scan(point2D* p, int n) {
     // Iterate over points and push on stack as necessary.
     int i = 2;
     while (i < n) {
+        // Stack has 0 or 1 element
+        if (s.size() <= 1) {
+            s.push(p[i]);
+            i++;
+            if (s.size() == 1) {
+                s.push(p[i]);
+                i++;
+            }
+        }
+        // Get points from stack.
         point2D first = secondFromTopInStack(s);
         point2D second = s.top();
         point2D third = p[i];
+        
         if (cmpDirection(first, second, third) == LEFT) {
             s.push(p[i]);
             i++;

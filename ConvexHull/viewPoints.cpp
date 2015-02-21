@@ -69,7 +69,6 @@ void initialize_points_arrow() {
     double offset = 200;
     int mod = 3;
     
-    
     // Draw first third of the arrow.
     for (int i = 0; i < n / mod; i++) {
         switch (i % mod) {
@@ -136,7 +135,7 @@ void initialize_points_cascade(){
     points[n-1].y = 3*WINDOWSIZE/4;
 }
 
-void initialize_points_rightangle(){
+void initialize_points_rightangle() {
     assert(points);
     int i;
     int j;
@@ -338,20 +337,25 @@ int main(int argc, char** argv) {
   //allocate global arrays of n points 
   points = (point2D*)malloc(n*sizeof(point2D));
   assert(points); 
-
-//  initialize_points_star();
-//initialize_points_cubic();
-//  init_x_marks_the_spot();
-  
-//     initialize_points_arrow();
-//      initialize_points_random();
     
-    initialize_points_vertical_line();
-//    initialize_points_horizontal_line();
 
+
+
+//    initialize_points_ten();    
+//    initialize_points_star();
+//    initialize_points_3();
+//    initialize_points_cubic();
+//    initialize_points_cascade();
+//    initialize_points_random();
+    
+//    initialize_points_arrow();
+//    initialize_points_vertical_line();
+//    initialize_points_horizontal_line();
+    
+//    init_x_marks_the_spot();
+//    initialize_points_stuff();
 
   //print_points();
-
   Rtimer rt1; 
   rt_start(rt1); 
   hull = graham_scan(points,n); 
