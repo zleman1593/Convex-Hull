@@ -134,14 +134,15 @@ pointNode* graham_scan(point2D* p, int n) {
     int i = 2;
     while (i < n) {
         // Stack has 0 or 1 element
-        if (s.size() <= 1) {
+        if (s.size() == 1) {
             s.push(p[i]);
             i++;
-            if (s.size() == 1) {
-                s.push(p[i]);
-                i++;
-            }
+        } else if (s.size() == 0 && i < n - 2) {
+            s.push(p[i + 1]);
+            s.push(p[i]);
+            i += 2;
         }
+
         // Get points from stack.
         point2D first = secondFromTopInStack(s);
         point2D second = s.top();

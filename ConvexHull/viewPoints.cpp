@@ -60,7 +60,6 @@ int n;
 pointNode*  hull = NULL; 
 
 
-
 void initialize_points_arrow() {
     assert(points);
     
@@ -342,18 +341,18 @@ int main(int argc, char** argv) {
 
 
 //    initialize_points_ten();    
-//    initialize_points_star();
-//    initialize_points_3();
 //    initialize_points_cubic();
-//    initialize_points_cascade();
 //    initialize_points_random();
+//    initialize_points_star();
+//    initialize_points_cascade();
+//    initialize_points_3();
     
-//    initialize_points_arrow();
-//    initialize_points_vertical_line();
+    initialize_points_vertical_line();
 //    initialize_points_horizontal_line();
     
-//    init_x_marks_the_spot();
+//    initialize_points_arrow();
 //    initialize_points_stuff();
+//    init_x_marks_the_spot();
 
   //print_points();
   Rtimer rt1; 
@@ -437,27 +436,27 @@ void draw_hull(){
   
   if (hull) {
     pointNode* prev = hull; 
-    pointNode* crt = prev->next; 
+    pointNode* crt = prev->next;
 
     while (crt) {
-      //draw a line from prev to crt 
+      //draw a line from prev to crt
       glBegin(GL_LINES);
-      glVertex2f(prev->p.x, prev->p.y); 
-      glVertex2f(crt->p.x, crt->p.y); 
+      glVertex2f(prev->p.x, prev->p.y);
+      glVertex2f(crt->p.x, crt->p.y);
       glEnd();
-      prev=crt; 
-      crt=crt->next; 
+      prev = crt;
+      crt = crt->next;
     }
-    
-    //draw a line from the last point to the first point 
+    //draw a line from the last point to the first point
     glBegin(GL_LINES);
-    glVertex2f(prev->p.x, prev->p.y); 
-    glVertex2f(hull->p.x, hull->p.y); 
+    if (prev == hull) {
+        glVertex2f(crt->p.x, crt->p.y);
+    } else {
+        glVertex2f(prev->p.x, prev->p.y);
+    }
+    glVertex2f(hull->p.x, hull->p.y);
     glEnd();
-    prev=crt; 
-    //crt=crt->next;
-  
-  }//if (hull)
+  }
 }
 
 
