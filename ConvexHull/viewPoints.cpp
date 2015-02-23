@@ -99,6 +99,24 @@ void initialize_points_arrow() {
     }
 }
 
+void init_two_circle()
+{
+    assert(points);
+    int rad1 = 100;
+    int rad2 = 200;
+    float piConstant = (4*M_PI) / n;
+    for (int i = 0; i < (n/2); ++i)
+    {
+        points[i].x = 200 + rad1 * sin(i*piConstant);
+        points[i].y = 200 + rad1 * cos(i*piConstant);
+    }
+    for (int i = (n/2) + 1; i < n; ++i)
+    {
+        points[i].x = 200 + rad2 * sin(i*piConstant);
+        points[i].y = 200 + rad2 * cos(i*piConstant);
+    }
+}
+
 void initialize_points_cascade(){
     assert(points);
     int i;
@@ -245,6 +263,80 @@ void initialize_points_random() {
     }
 }
 
+void initialize_points_circle() {
+    assert(points);
+    double step = 2 * M_PI/n;
+    double rad = 100;
+    for(int i = 0; i < n; i++) {
+        points[i].x = rad * cos(i*step)*(WINDOWSIZE/(rad*4)) + (WINDOWSIZE/2);
+        points[i].y = rad * sin(i*step)*(WINDOWSIZE/(rad*4)) + (WINDOWSIZE/2);
+    }
+}
+
+void initialize_points_eye_of_sauron()
+{
+    assert(points);
+    int circleRadius = WINDOWSIZE / 3;
+    int ovalXRadius = 35;
+    int ovalYRadius = circleRadius - 20;
+    int smallOvalXRadius = ovalXRadius / 3;
+    int smallOvalYRadius = ovalYRadius * 9 / 10;
+    int i = 0;
+    while(i < n / 3)
+    {
+        points[i].x = circleRadius * cos((2 * M_PI * i) / (n / 3)) + WINDOWSIZE / 2 - 20;
+        points[i].y = circleRadius * sin((2 * M_PI * i) / (n / 3)) + WINDOWSIZE / 2;
+        i++;
+    }
+    while(i < 2 * n / 3)
+    {
+        points[i].x = circleRadius * cos((2 * M_PI * i) / (n / 3)) + WINDOWSIZE / 2 + 20;
+        points[i].y = circleRadius * sin((2 * M_PI * i) / (n / 3)) + WINDOWSIZE / 2;
+        i++;
+    }
+    while(i < 5 * n / 6)
+    {
+        points[i].x = ovalXRadius * cos((2 * M_PI * i) / (n / 6)) + WINDOWSIZE / 2;
+        points[i].y = ovalYRadius * sin((2 * M_PI * i) / (n / 6)) + WINDOWSIZE / 2;
+        i++;
+    }
+    while(i < n)
+    {
+        points[i].x = smallOvalXRadius * cos((2 * M_PI * i) / (n / 6)) + WINDOWSIZE / 2;
+        points[i].y = smallOvalYRadius * sin((2 * M_PI * i) / (n / 6)) + WINDOWSIZE / 2;
+        i++;
+    }
+}
+
+void initialize_points_line_and_point()
+{
+    assert(points);
+    points[0].x = WINDOWSIZE / 2;
+    points[0].y = WINDOWSIZE / 3;
+    for(int i = 1; i < n; i++)
+    {
+        points[i].x = WINDOWSIZE * i / n;
+        points[i].y = WINDOWSIZE * 2 / 3;
+    }
+}
+
+void initialize_points_filled_square(){
+    initialize_points_random();
+    
+    points[0].x = (int)(.3*WINDOWSIZE)/2;
+    points[0].y = (int)(.3*WINDOWSIZE)/2;
+    
+    points[1].x = (int)(.3*WINDOWSIZE)/2;
+    points[1].y = (int)(.85*WINDOWSIZE);
+    
+    points[2].x = (int)(.85*WINDOWSIZE);
+    points[2].y = (int)(.3*WINDOWSIZE)/2;
+    
+    points[3].x = (int)(.85*WINDOWSIZE);
+    points[3].y = (int)(.85*WINDOWSIZE);
+    
+    
+}
 
 /* ****************************** */
 /* initialize the array of points stored in global variable points[]
@@ -301,8 +393,6 @@ void print_hull () {
     printf(" total %d points\n", i);
 }
 
-
-
 /* ****************************** */
 int main(int argc, char** argv) {
     
@@ -330,7 +420,12 @@ int main(int argc, char** argv) {
 //        initialize_points_arrow();
 //        initialize_points_vertical_line();
 //        initialize_points_horizontal_line();
-    
+//        initialize_points_circle();
+//        initialize_points_line_and_point();
+//        initialize_points_eye_of_sauron();
+//        init_two_circle();
+//        initialize_points_filled_square();
+
     //print_points();
     Rtimer rt1;
     rt_start(rt1);
@@ -474,7 +569,3 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
     glLoadIdentity();             // Reset
     gluOrtho2D(0.0, (GLdouble) width, 0.0, (GLdouble) height); 
 }
-
-
-
-
