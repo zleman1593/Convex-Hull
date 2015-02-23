@@ -89,13 +89,15 @@ point2D secondFromTopInStack(std::stack<point2D> &stack){
 pointNode* createListFromFinalStack(){
     pointNode *node;
     pointNode *head = NULL;
-    while (s.size() > 0) {
+    while (!s.empty()) {
         node = (pointNode *)malloc(sizeof(pointNode));
         point2D top = s.top();
+        if (top.x != 0 || top.y != 0) {
+            node->p = top;
+            node->next = head;
+            head = node;
+        }
         s.pop();
-        node->p = top;
-        node->next = head;
-        head = node;
     }
     return head;
 }
@@ -104,6 +106,7 @@ pointNode* createListFromFinalStack(){
 /* Compute the convex hull of the points in p; the points on the CH are returned as a list
  */
 pointNode* graham_scan(point2D* p, int n) {
+    
     // Starting point is the one with lowest y coordinate.
     p_0 = p[0];
     int lowest_y = INT32_MAX;
@@ -122,7 +125,7 @@ pointNode* graham_scan(point2D* p, int n) {
     point2D temp = p[0];
     p[0] = p_0;
     p[index] = temp;
-    
+
     // Sort the other n - 1 points by polar angle/distance wrt Po.
     qsort(&p[1], n - 1, sizeof(point2D), cmpfunc);
     
@@ -155,7 +158,6 @@ pointNode* graham_scan(point2D* p, int n) {
             s.pop();
         }
     }
-    
     return createListFromFinalStack();
 }
 

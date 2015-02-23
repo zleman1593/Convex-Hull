@@ -1,16 +1,16 @@
-/* view1.c 
-
-Laura Toma
-
-What it does:  
-
+/* view1.c
+ 
+ Laura Toma
+ 
+ What it does:
+ 
  - draws a set of points in the default 2D projection and with no
-
+ 
  - transformations.  a tentative function for printing and drawing a
  - list of points (assumed to be a convex hull). These functions were
  - not debigged so use them at your own risk.
-
-*/
+ 
+ */
 
 #include "geom.h"
 #include "rtimer.h"
@@ -50,14 +50,14 @@ void main_menu(int value);
 
 
 /* global variables */
-const int WINDOWSIZE = 500; 
+const int WINDOWSIZE = 500;
 
-//the array of n points 
+//the array of n points
 point2D*  points = NULL;
-int n;  
+int n;
 
-//a list of points holding the convex hull 
-pointNode*  hull = NULL; 
+//a list of points holding the convex hull
+pointNode*  hull;
 
 
 void initialize_points_arrow() {
@@ -99,24 +99,6 @@ void initialize_points_arrow() {
     }
 }
 
-
-void initialize_points_stuff(){
-    assert(points);
-    int i;
-    points[0].x = 100;
-    points[0].y  = 100;
-    for(i = 1; i < n/2; i++){
-        points[i].y = WINDOWSIZE*2/3-i;
-        points[i].x = WINDOWSIZE/2 +i;
-    }
-    
-    for(i = n/2; i < n; i++){
-        points[i].x = WINDOWSIZE/3-i;
-        points[i].y = (WINDOWSIZE*2/3) + i;
-    }
-    
-    
-}
 void initialize_points_cascade(){
     assert(points);
     int i;
@@ -253,255 +235,244 @@ void init_x_marks_the_spot() {
 /* ****************************** */
 /* initialize  the array of points stored in global variable points[] with random points */
 void initialize_points_random() {
-  //points must be allocated 
-  assert(points); 
-  
-  int i; 
-  for (i=0; i<n; i++) {
-    points[i].x = (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE)); 
-    points[i].y =  (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE));
-  }
+    //points must be allocated
+    assert(points);
+    
+    int i;
+    for (i=0; i<n; i++) {
+        points[i].x = (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE));
+        points[i].y =  (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE));
+    }
 }
 
 
 /* ****************************** */
 /* initialize the array of points stored in global variable points[]
-   with random points shaped like a star */
+ with random points shaped like a star */
 void initialize_points_star() {
-  
-  //points must be allocated 
-  assert(points); 
-  
-  int i; 
-  for (i=0; i<n; i++) {
-    if (i%2 == 0) {
-      
-      points[i].x = (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE)); 
-      points[i].y =  random() % ((int)(.7*WINDOWSIZE))  / 5;
-      points[i].y += (int)((1-.7/5)*WINDOWSIZE/2);
-    };
-    if (i%2 == 1)  {
-      
-      points[i].x = random() % ((int)(.7*WINDOWSIZE)) / 5; 
-      points[i].x +=  (int)((1-.7/5)*WINDOWSIZE/2);
-      points[i].y =  (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE));
-    }
-   
-  }//for i
-
+    
+    //points must be allocated
+    assert(points);
+    
+    int i;
+    for (i=0; i<n; i++) {
+        if (i%2 == 0) {
+            
+            points[i].x = (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE));
+            points[i].y =  random() % ((int)(.7*WINDOWSIZE))  / 5;
+            points[i].y += (int)((1-.7/5)*WINDOWSIZE/2);
+        };
+        if (i%2 == 1)  {
+            
+            points[i].x = random() % ((int)(.7*WINDOWSIZE)) / 5;
+            points[i].x +=  (int)((1-.7/5)*WINDOWSIZE/2);
+            points[i].y =  (int)(.3*WINDOWSIZE)/2 + random() % ((int)(.7*WINDOWSIZE));
+        }
+        
+    }//for i
+    
 }
 
 /* ****************************** */
 /* print the array of points stored in global variable points[]*/
 void print_points() {
-  assert(points); 
-  int i; 
-  printf("points: ");
-  for (i=0; i<n; i++) {
-    printf("[%3d,%3d] ", points[i].x, points[i].y);
-  }
-  printf("\n");
-  fflush(stdout);  //flush stdout, weird sync happens when using gl thread
+    assert(points);
+    int i;
+    printf("points: ");
+    for (i=0; i<n; i++) {
+        printf("[%3d,%3d] ", points[i].x, points[i].y);
+    }
+    printf("\n");
+    fflush(stdout);  //flush stdout, weird sync happens when using gl thread
 }
 
 /* ****************************** */
-//print the list of points in global variable  hull; 
+//print the list of points in global variable  hull;
 void print_hull () {
-  
-  printf("convex hull: ");
-  int i=0;
-  pointNode* crt = hull; 
-  while (crt) {
-    i++; 
-    printf("[%3d,%3d] ", crt->p.x, crt->p.y);
-    crt = crt->next; 
-  }
-  printf(" total %d points\n", i);
+    
+    printf("convex hull: ");
+    int i=0;
+    pointNode* crt = hull;
+    while (crt) {
+        i++;
+        printf("[%3d,%3d] ", crt->p.x, crt->p.y);
+        crt = crt->next;
+    }
+    printf(" total %d points\n", i);
 }
 
 
 
 /* ****************************** */
 int main(int argc, char** argv) {
-
-  //read number of points from user
-  if (argc!=2) {
-    printf("usage: viewPoints <nbPoints>\n");
-    exit(1); 
-  }
-  n = atoi(argv[1]); 
-  printf("you entered n=%d\n", n);
-  assert(n >0); 
-
-  //allocate global arrays of n points 
-  points = (point2D*)malloc(n*sizeof(point2D));
-  assert(points); 
     
-
-
-
-//    initialize_points_ten();    
-//    initialize_points_cubic();
-//    initialize_points_random();
-//    initialize_points_star();
-//    initialize_points_cascade();
-//    initialize_points_3();
+    //read number of points from user
+    if (argc!=2) {
+        printf("usage: viewPoints <nbPoints>\n");
+        exit(1);
+    }
+    n = atoi(argv[1]);
+    printf("you entered n=%d\n", n);
+    assert(n > 0);
     
-    initialize_points_vertical_line();
-//    initialize_points_horizontal_line();
+    //allocate global arrays of n points
+    points = (point2D*)malloc(n*sizeof(point2D));
+    assert(points);
     
-//    initialize_points_arrow();
-//    initialize_points_stuff();
-//    init_x_marks_the_spot();
-
-  //print_points();
-  Rtimer rt1; 
-  rt_start(rt1); 
-  hull = graham_scan(points,n); 
-  rt_stop(rt1); 
-  //print the hull 
-  print_hull(); 
-  //print the timing 
-  char buf [1024]; 
-  rt_sprint(buf,rt1);
-  printf("finding convex hull with graham scan:  %s\n\n", buf);
-  fflush(stdout); 
-
- 
-  
-
-  /* initialize GLUT  */
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-  glutInitWindowSize(WINDOWSIZE, WINDOWSIZE);
-  glutInitWindowPosition(100,100);
-  glutCreateWindow(argv[0]);
-
-  /* register callback functions */
-  glutDisplayFunc(display); 
-  glutKeyboardFunc(keypress);
-
-  /* init GL */
-  /* set background color black*/
-  glClearColor(0, 0, 0, 0);   
-  /* here we can enable depth testing and double buffering and so
+    
+    /* TET CASES */
+//        initialize_points_ten();
+//        initialize_points_cubic();
+//        initialize_points_random();
+//        initialize_points_star();
+//        initialize_points_cascade();
+//        initialize_points_3();
+//        initialize_points_arrow();
+//        initialize_points_vertical_line();
+//        initialize_points_horizontal_line();
+    
+    //print_points();
+    Rtimer rt1;
+    rt_start(rt1);
+    hull = graham_scan(points,n);
+    rt_stop(rt1);
+    //print the hull
+    print_hull();
+    //print the timing
+    char buf [1024];
+    rt_sprint(buf,rt1);
+    printf("finding convex hull with graham scan:  %s\n\n", buf);
+    fflush(stdout);
+    
+    /* initialize GLUT  */
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(WINDOWSIZE, WINDOWSIZE);
+    glutInitWindowPosition(100,100);
+    glutCreateWindow(argv[0]);
+    
+    /* register callback functions */
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keypress);
+    
+    /* init GL */
+    /* set background color black*/
+    glClearColor(0, 0, 0, 0);
+    /* here we can enable depth testing and double buffering and so
      on */
-
-  
-  /* give control to event handler */
-  glutMainLoop();
-  return 0;
+    
+    
+    /* give control to event handler */
+    glutMainLoop();
+    return 0;
 }
 
 
 /* ****************************** */
-/* draw the array of points stored in global variable points[] 
-   each point is drawn as a small square 
-  
-*/
+/* draw the array of points stored in global variable points[]
+ each point is drawn as a small square
+ 
+ */
 void draw_points(){
-
-  const int R= 1;
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-  //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-  //set color 
-  glColor3fv(yellow);   
-  
-  assert(points);
-  int i;
-  for (i=0; i<n; i++) {
-    //draw a small square centered at (points[i].x, points[i].y)
-    glBegin(GL_POLYGON);
-    glVertex2f(points[i].x -R,points[i].y-R);
-    glVertex2f(points[i].x +R,points[i].y-R);
-    glVertex2f(points[i].x +R,points[i].y+R);
-    glVertex2f(points[i].x -R,points[i].y+R);
-    glEnd();
-  }
-
+    
+    const int R= 1;
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    
+    //set color
+    glColor3fv(yellow);
+    
+    assert(points);
+    int i;
+    for (i=0; i<n; i++) {
+        //draw a small square centered at (points[i].x, points[i].y)
+        glBegin(GL_POLYGON);
+        glVertex2f(points[i].x -R,points[i].y-R);
+        glVertex2f(points[i].x +R,points[i].y-R);
+        glVertex2f(points[i].x +R,points[i].y+R);
+        glVertex2f(points[i].x -R,points[i].y+R);
+        glEnd();
+    }
+    
 }
 
 
 
 /* ****************************** */
 /* draw the list of points stored in global variable hull; the points
-   are expected to be in order (ccw or cw) and consecutive points are
-   connected by a line
-*/
+ are expected to be in order (ccw or cw) and consecutive points are
+ connected by a line
+ */
 void draw_hull(){
-
-  //set color 
-  glColor3fv(red);   
-  
-  if (hull) {
-    pointNode* prev = hull; 
-    pointNode* crt = prev->next;
-
-    while (crt) {
-      //draw a line from prev to crt
-      glBegin(GL_LINES);
-      glVertex2f(prev->p.x, prev->p.y);
-      glVertex2f(crt->p.x, crt->p.y);
-      glEnd();
-      prev = crt;
-      crt = crt->next;
-    }
-    //draw a line from the last point to the first point
-    glBegin(GL_LINES);
-    if (prev == hull) {
-        glVertex2f(crt->p.x, crt->p.y);
-    } else {
+    
+    //set color
+    glColor3fv(red);
+    
+    if (hull) {
+        pointNode* prev = hull;
+        pointNode* crt = prev->next;
+        
+        while (crt) {
+            //draw a line from prev to crt
+            glBegin(GL_LINES);
+            glVertex2f(prev->p.x, prev->p.y);
+            glVertex2f(crt->p.x, crt->p.y);
+            glEnd();
+            
+            prev = crt;
+            crt = crt->next;
+        }
+        //draw a line from the last point to the first point
+        glBegin(GL_LINES);
         glVertex2f(prev->p.x, prev->p.y);
+        glVertex2f(hull->p.x, hull->p.y);
+        glEnd();
     }
-    glVertex2f(hull->p.x, hull->p.y);
-    glEnd();
-  }
 }
 
 
 /* ****************************** */
 void display(void) {
-
-  glClear(GL_COLOR_BUFFER_BIT);
-  glMatrixMode(GL_MODELVIEW); 
-  glLoadIdentity(); //clear the matrix
-
-
-  /* the default GL window is [-1,1]x[-1,1] with the origin in the
+    
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity(); //clear the matrix
+    
+    
+    /* the default GL window is [-1,1]x[-1,1] with the origin in the
      center the points are in the range (0,0) to (WINSIZE,WINSIZE), so
      they need to be mapped to [-1,1]x [-1,1] */
-  glScalef(2.0/WINDOWSIZE, 2.0/WINDOWSIZE, 1.0);  
-  glTranslatef(-WINDOWSIZE/2, -WINDOWSIZE/2, 0); 
-  draw_points();
-  draw_hull(); 
-
-  /* execute the drawing commands */
-  glFlush();
+    glScalef(2.0/WINDOWSIZE, 2.0/WINDOWSIZE, 1.0);
+    glTranslatef(-WINDOWSIZE/2, -WINDOWSIZE/2, 0);
+    draw_points();
+    draw_hull();
+    
+    /* execute the drawing commands */
+    glFlush();
 }
 
 
 
 /* ****************************** */
 void keypress(unsigned char key, int x, int y) {
-  switch(key) {
-  case 'q':
-    exit(0);
-    break;
-  } 
+    switch(key) {
+        case 'q':
+            exit(0);
+            break;
+    } 
 }
 
 
 /* Handler for window re-size event. Called back when the window first appears and
-   whenever the window is re-sized with its new width and height */
+ whenever the window is re-sized with its new width and height */
 void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integer
-     
-   // Set the viewport to cover the new window
-   glViewport(0, 0, width, height);
- 
-   glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
-   glLoadIdentity();             // Reset
-   gluOrtho2D(0.0, (GLdouble) width, 0.0, (GLdouble) height); 
+    
+    // Set the viewport to cover the new window
+    glViewport(0, 0, width, height);
+    
+    glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
+    glLoadIdentity();             // Reset
+    gluOrtho2D(0.0, (GLdouble) width, 0.0, (GLdouble) height); 
 }
 
 
