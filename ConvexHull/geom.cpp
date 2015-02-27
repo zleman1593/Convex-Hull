@@ -92,6 +92,7 @@ pointNode* createListFromFinalStack(){
     while (!s.empty()) {
         node = (pointNode *)malloc(sizeof(pointNode));
         point2D top = s.top();
+        printf("X COORD: %d\n", top.x);
         if (top.x != 0 || top.y != 0) {
             node->p = top;
             node->next = head;
@@ -141,8 +142,8 @@ pointNode* graham_scan(point2D* p, int n) {
             s.push(p[i]);
             i++;
         } else if (s.size() == 0 && i < n - 2) {
-            s.push(p[i + 1]);
             s.push(p[i]);
+            s.push(p[i + 1]);
             i += 2;
         }
 

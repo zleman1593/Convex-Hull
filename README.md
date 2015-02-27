@@ -9,4 +9,4 @@ Algorithm:
 
 Testing:
 1. Imported different test cases to ViewPoints.cpp
-2. To run, uncomment one of the test cases in lines 414-427
+2. To run, uncomment one of the test cases in lines 433-447

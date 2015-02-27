@@ -60,6 +60,14 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "400"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "1000"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "200"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

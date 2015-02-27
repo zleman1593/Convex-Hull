@@ -67,9 +67,10 @@ void initialize_points_arrow() {
     double slope = 0.5;
     double offset = 200;
     int mod = 3;
+    int limit = (int)(WINDOWSIZE / 2);
     
     // Draw first third of the arrow.
-    for (int i = 0; i < n / mod; i++) {
+    for (int i = 0; i < limit / mod; i++) {
         switch (i % mod) {
             case 0: {
                 // Upper half of head.
@@ -93,7 +94,7 @@ void initialize_points_arrow() {
     
     
     // Fill in the rest with a straight line.
-    for (int i = n / mod; i < n; i += mod) {
+    for (int i = limit / mod; i < limit; i += mod) {
         points[i].y = pos;
         points[i].x = i + offset;
     }
@@ -365,6 +366,24 @@ void initialize_points_star() {
     
 }
 
+void initialize_points_stuff(){
+    assert(points);
+    int i;
+    points[0].x = 100;
+    points[0].y  = 100;
+    for(i = 1; i < n/2; i++){
+        points[i].y = WINDOWSIZE*2/3-i;
+        points[i].x = WINDOWSIZE/2 +i;
+    }
+    
+    for(i = n/2; i < n; i++){
+        points[i].x = WINDOWSIZE/3-i;
+        points[i].y = (WINDOWSIZE*2/3) + i;
+    }
+    
+    
+}
+
 /* ****************************** */
 /* print the array of points stored in global variable points[]*/
 void print_points() {
@@ -417,14 +436,15 @@ int main(int argc, char** argv) {
 //        initialize_points_star();
 //        initialize_points_cascade();
 //        initialize_points_3();
-//        initialize_points_arrow();
 //        initialize_points_vertical_line();
 //        initialize_points_horizontal_line();
 //        initialize_points_circle();
 //        initialize_points_line_and_point();
-        initialize_points_eye_of_sauron();
-//        init_two_circle();
+//        initialize_points_eye_of_sauron();
 //        initialize_points_filled_square();
+//        init_two_circle();
+//        initialize_points_stuff();
+//        initialize_points_arrow();
 
     //print_points();
     Rtimer rt1;
