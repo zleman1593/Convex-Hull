@@ -422,7 +422,7 @@ int main(int argc, char** argv) {
 //        initialize_points_horizontal_line();
 //        initialize_points_circle();
 //        initialize_points_line_and_point();
-//        initialize_points_eye_of_sauron();
+        initialize_points_eye_of_sauron();
 //        init_two_circle();
 //        initialize_points_filled_square();
 
